@@ -1,1 +1,2 @@
-node show.js 
+node show.js &
+node server.js

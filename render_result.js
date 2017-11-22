@@ -26,7 +26,7 @@ MongoClient.connect(DB_CONN_STR, function(err, db) {
 
   newsdb.find({title:{$type:2}}).toArray(function(err, docs) {
     ejs.renderFile('./views/1.ejs',{json:{docs:docs}},function(err,data){
-      fs.writeFile(path.join(path.dirname(),file_name),data,function(err){
+      fs.writeFile(file_name,data,function(err){
           console.log("write cnbeta success");
       });
     });

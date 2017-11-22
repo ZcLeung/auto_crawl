@@ -10,7 +10,7 @@ var DB_CONN_STR = 'mongodb://localhost:27017/crawl_test';
 
 
 
-var cone = function(){
+var toCrawl = function(){
   //获取当前的年月日
   var now = new Date().toDateString();
   var arr_date = new Array();
@@ -102,25 +102,30 @@ var cone = function(){
           db.close();
       });
   });
-  /******************************************************************************
-  3.从数据库中读取数据，利用ejs模板把数据渲染到html文件
-  ******************************************************************************/
+
+
+  }
+}
+
+
+function toRender(){
   MongoClient.connect(DB_CONN_STR, function(err, db) {
     console.log("连接成功！");
     var newsdb = db.collection(time_stamp);
     newsdb.find({title:{$type:2}}).toArray(function(err, docs) {
       ejs.renderFile('./views/1.ejs',{json:{docs:docs}},function(err,data){
-        fs.writeFile(path.join(path.dirname(),file_name),data,function(err){
+        fs.writeFile(file_name,data,function(err){
             console.log("write cnbeta success");
         });
       });
   });
   db.close();
   });
-
-  }
 }
+schedule.scheduleJob('* 5 * * * *', function(){
+  toCrawl();
+});
 
-schedule.scheduleJob('10 * * * * *', function(){
-  cone();
+schedule.scheduleJob('* 6 * * * *', function(){
+  toRender();
 });
