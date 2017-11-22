@@ -23,4 +23,4 @@ node show.js
 node server.js
 ```
 
-> 此时浏览器访问http://localhost:8082即可查看渲染好的html页面
+> 此时浏览器访问http://localhost:8082 ，即可查看渲染好的html页面
