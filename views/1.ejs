@@ -7,6 +7,11 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.js"></script>
   <title>资讯爬虫</title>
+  <style>
+    tr{
+      height: 30px;
+    }
+  </style>
 </head>
 <body>
   <div>
@@ -14,13 +19,22 @@
       <% for(var i=0;i<json.docs.length;i++){ %>
         <tr>
           <td class="col-md-2"><%= i+1 %></td>
-          <td class="col-md-4"><img src=<%= json.docs[i].img %>></td>
-          <td class="col-md-6"><a href=<%= json.docs[i].href %> >
-          <%= json.docs[i].title %>
-      </a></td></tr>
+          <% if (json.docs[i].img){ %>
+            <td class="col-md-10"><a href=<%= json.docs[i].href %>
+              <div><img src=<%= json.docs[i].img %> style="display:inline-block; padding-right:15px;"></<div>
+              <div style="display:inline-block; height3ox; line-height:30px;"><%= json.docs[i].title %></div>
+              </a>
+          </td>
+        <% }else{ %>
+          <td class="col-md-10"><a href=<%= json.docs[i].href %> >
+            <%= json.docs[i].title %>
+          </a></td>
+        <% } %>
+      </tr>
       <% } %>
     </table>
 
   </div>
 </body>
 </html>
+
