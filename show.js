@@ -109,6 +109,15 @@ var toCrawl = function(){
 
 
 function toRender(){
+  var now = new Date().toDateString();
+  var arr_date = new Array();
+  for(i=0;i<now.length;i++){
+    if(now[i] != " "){
+      arr_date.push(now[i]);
+    }
+  }
+  var time_stamp = arr_date.join("");
+  var file_name = "result"+time_stamp+".html";
   MongoClient.connect(DB_CONN_STR, function(err, db) {
     console.log("连接成功！");
     var newsdb = db.collection(time_stamp);
@@ -122,6 +131,7 @@ function toRender(){
   db.close();
   });
 }
+
 schedule.scheduleJob('* 5 * * * *', function(){
   toCrawl();
 });

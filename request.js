@@ -9,7 +9,7 @@ var options = {
 
 function callback(err,response,body){
   if(!err && response.statusCode == 200){
-    fs.writeFile(path.join(path.dirname(),'raw.html'),body,function(err){
+    fs.writeFile('raw.html',body,function(err){
       if(err){
         throw err;
       }
